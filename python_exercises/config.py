@@ -1,0 +1,8 @@
+class Config:
+	PREDICTION_DS_CONTRIBUTING_FACTORS1="contributing_factors1"
+	PREDICTION_DS_CONTRIBUTING_FACTORS2="contributing_factors2"
+	PREDICTION_DS_CONTRIBUTING_FACTORS3="contributing_factors3"
+	PREDICTION_DS_CONTRIBUTING_FACTORS4="contributing_factors4"
+	PREDICTION_DS_CONTRIBUTING_FACTORS5="contributing_factors5"
+	PREDICTION_DS_CONTRIBUTING_FACTORS6="contributing_factors6"
+    
