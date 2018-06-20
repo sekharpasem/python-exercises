@@ -61,6 +61,22 @@ class ISODateJSONDecoder(json.JSONDecoder):
     else:
       return (s, end)
 
+class ISODate_H_M_JSONDecoder(json.JSONDecoder):
+  """ JSON Decoder that transforms ISO time format representations into datetime.datetime with new format mm/dd/yy h/MM"""
+  iso_datetime_regex = re.compile("[0-1]?[0-9]\/([0-2]?[0-9]|3[0-1])\/[0-9]{2} ([0-1]?[0-9]|2[0-3]):[0-5][0-9]")
+  DATE_FORMAT = '%m/%d/%y %H:%M'
+
+  def __init__(self, *args, **kwargs):
+    json.JSONDecoder.__init__(self, *args, **kwargs)
+    self.parse_string = self.new_scanstring
+    self.scan_once = json.scanner.py_make_scanner(self)
+
+  def new_scanstring(self, s, end, encoding=None, strict=True):
+    (s, end) = json.decoder.scanstring(s, end, encoding)
+    if self.iso_datetime_regex.match(s):
+      return (datetime.strptime(s, self.DATE_FORMAT), end)
+    else:
+      return (s, end)
 
 class ISODateJSONEncoder(json.JSONEncoder):
   DATE_FORMAT = '%d/%m/%Y %H:%M:%S'
